@@ -27,8 +27,8 @@ void Ultrasonic_Class::Check(void)
     delay(50);
     if(Ultrasonic.Distance_cm() < 20){
         checkCircle[0] = 1;
-        Robot.Motion.MoveForward(1000, 2000);
-        Robot.Motion.MoveBackward(1000, 2000);
+        Robot.Motion.MoveForward(1000);
+        Robot.Motion.MoveBackward(1000);
     }
     delay(50);
     Robot.Motion.RunLR(2000, -2000);
@@ -36,8 +36,8 @@ void Ultrasonic_Class::Check(void)
     delay(50);
     if(Ultrasonic.Distance_cm() < 20){
         checkCircle[1] = 1;
-        Robot.Motion.MoveForward(1000, 2000);
-        Robot.Motion.MoveBackward(1000, 2000);
+        Robot.Motion.MoveForward(1000);
+        Robot.Motion.MoveBackward(1000);
     }
     delay(50);
     Robot.Motion.RunLR(2000, -2000);
@@ -45,8 +45,8 @@ void Ultrasonic_Class::Check(void)
     delay(50);
     if(Ultrasonic.Distance_cm() < 20){
         checkCircle[2] = 1;
-        Robot.Motion.MoveForward(1000, 2000);
-        Robot.Motion.MoveBackward(1000, 2000);
+        Robot.Motion.MoveForward(1000);
+        Robot.Motion.MoveBackward(1000);
     }
     delay(50);
     Robot.Motion.RunLR(2000, -2000);
@@ -54,8 +54,8 @@ void Ultrasonic_Class::Check(void)
     delay(50);
     if(Ultrasonic.Distance_cm() < 25){
         checkCircle[3] = 1;
-        Robot.Motion.MoveForward(1000, 2000);
-        Robot.Motion.MoveBackward(1000, 2000);
+        Robot.Motion.MoveForward(1000);
+        Robot.Motion.MoveBackward(1000);
     }
     delay(50);
 }

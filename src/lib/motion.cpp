@@ -72,7 +72,7 @@ void Motion_Class::WaitRotation(uint32_t rotation_step)
 
   Stop(); // Dừng robot sau khi hoàn thành
 }
-void Motion_Class::MoveForward(uint32_t distance_step, float speed)
+void Motion_Class::MoveForward(uint32_t distance_step)
 {
   Robot.Motion.RunLR(speed, speed);
   Robot.Motion.WaitDistance(distance_step);
@@ -80,7 +80,7 @@ void Motion_Class::MoveForward(uint32_t distance_step, float speed)
 }
 
 // Hàm lùi 'distance_step' buoc voi toc do speed
-void Motion_Class::MoveBackward(uint32_t distance_step, float speed)
+void Motion_Class::MoveBackward(uint32_t distance_step)
 {
   Robot.Motion.RunLR(-speed, -speed);
   Robot.Motion.WaitDistance(distance_step);

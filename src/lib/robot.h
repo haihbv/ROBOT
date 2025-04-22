@@ -5,10 +5,10 @@
 #include "Servo.h"
 #include "float_math.h"
 
-#define BUTTON_PIN0             A7
-#define BUTTON_PIN1             A4
-#define BUTTON_PIN2             A5
-#define BUTTON_PIN3             A6
+#define BUTTON_PIN0             A0
+#define BUTTON_PIN1             A1
+#define BUTTON_PIN2             A2
+#define BUTTON_PIN3             A3
 
 #define   RIGHT_STEPPER_PIN1    2
 #define   RIGHT_STEPPER_PIN2    3
@@ -25,6 +25,8 @@
 
 #define Ulsonic_TRIG_PIN 12 
 #define Ulsonic_ECHO_PIN 13 
+
+#define speed 2000
 class Button_Class
 {
   private:
@@ -68,8 +70,8 @@ class Motion_Class
     void Stop(void);
     void WaitDistance(uint32_t distance_step);
     void WaitRotation(uint32_t rotation_step);
-    void MoveForward(uint32_t distance_step, float speed);
-    void MoveBackward(uint32_t distance_step, float speed);
+    void MoveForward(uint32_t distance_step);
+    void MoveBackward(uint32_t distance_step);
     int  GetEncoder(void);
 };
 

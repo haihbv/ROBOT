@@ -20,13 +20,15 @@ uint8_t Button_Class::IsPressed(void)
   uint8_t ispressed = 0;
   uint8_t status = Read();
 
-  if(status && (status != pre_press_status))
+  //if(status && (status != pre_press_status))
+  if(!status && (status != pre_press_status))
   {
     ispressed = 1;
   }
   pre_press_status = status;
   return ispressed;
 }
+
 
 // kiem tra nut nhan duoc bam va giu trong 1 khoan thoi gian
 uint8_t Button_Class::Hold(uint16_t hold_time)
@@ -40,7 +42,8 @@ uint8_t Button_Class::Hold(uint16_t hold_time)
     pre_hold_status = status;
   }
   
-  if(status && (status != pre_hold_status) && (millis() - pre_time > hold_time))
+  //if(status && (status != pre_hold_status) && (millis() - pre_time > hold_time))
+  if(!status && (status != pre_hold_status) && (millis() - pre_time > hold_time))
   {
     ispressed = 1;
     pre_hold_status = status;
