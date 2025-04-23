@@ -4,60 +4,46 @@ Ultrasonic_Class Ultrasonic;
 
 void Ultrasonic_Class::Init(void)
 {
-    pinMode(trig, OUTPUT);
-    pinMode(echo, INPUT);
+    pinMode(TRIG, OUTPUT);
+    pinMode(ECHO, INPUT);
 }
 
-float Ultrasonic_Class::Distance_cm(void)
+uint16_t Ultrasonic_Class::GetDistance(void)
 {
-    digitalWrite(trig, LOW);
+    digitalWrite(TRIG, LOW);
     delayMicroseconds(2);
-    digitalWrite(trig, HIGH);
+    digitalWrite(TRIG, HIGH);
     delayMicroseconds(10);
-    digitalWrite(trig, LOW);
-    
-   float time = pulseIn(echo, HIGH);
-   
-    return (time * 0.0343) / 2.0;// tra ve cm
+    digitalWrite(TRIG, LOW);
+
+    unsigned long time = pulseIn(ECHO, HIGH); 
+    uint16_t distance = (time * 343) / 2000; 
+
+    return (distance <= 2 || distance >= 400) ? 0 : distance; 
 }
 void Ultrasonic_Class::Check(void)
 {
-    Robot.Motion.RunLR(2000, -2000);
-    Robot.Motion.WaitRotation(985);
-    delay(50);
-    if(Ultrasonic.Distance_cm() < 20){
-        checkCircle[0] = 1;
-        Robot.Motion.MoveForward(1000);
-        Robot.Motion.MoveBackward(1000);
+    const int ROTATION_STEPS[4] = {1058, 2117, 2117, 2117}; 
+    const int DISTANCE_THRESHOLDS[4] = {20, 20, 20, 20};                       
+
+    for (int i = 0; i < 4; i++)
+    {
+        // Quay robot
+        Robot.Motion.RunLR(speed, -speed);
+        Robot.Motion.WaitRotation(ROTATION_STEPS[i]);
+        delay(50);
+
+        // Kiểm tra khoảng cách
+        uint16_t distance = GetDistance();
+        if (distance != 0 && distance < DISTANCE_THRESHOLDS[i])
+        {
+            Look_Around[i] = 1;
+        }
+        else
+        {
+            Look_Around[i] = 0;
+        }
+
+        delay(50);
     }
-    delay(50);
-    Robot.Motion.RunLR(2000, -2000);
-    Robot.Motion.WaitRotation(2048);
-    delay(50);
-    if(Ultrasonic.Distance_cm() < 20){
-        checkCircle[1] = 1;
-        Robot.Motion.MoveForward(1000);
-        Robot.Motion.MoveBackward(1000);
-    }
-    delay(50);
-    Robot.Motion.RunLR(2000, -2000);
-    Robot.Motion.WaitRotation(1970);
-    delay(50);
-    if(Ultrasonic.Distance_cm() < 20){
-        checkCircle[2] = 1;
-        Robot.Motion.MoveForward(1000);
-        Robot.Motion.MoveBackward(1000);
-    }
-    delay(50);
-    Robot.Motion.RunLR(2000, -2000);
-    Robot.Motion.WaitRotation(2048);
-    delay(50);
-    if(Ultrasonic.Distance_cm() < 25){
-        checkCircle[3] = 1;
-        Robot.Motion.MoveForward(1000);
-        Robot.Motion.MoveBackward(1000);
-    }
-    delay(50);
 }
-
-

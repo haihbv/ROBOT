@@ -23,8 +23,8 @@
 #define   LEFT_SERVO_PIN        10
 #define   RIGHT_SERVO_PIN       11
 
-#define Ulsonic_TRIG_PIN 12 
-#define Ulsonic_ECHO_PIN 13 
+#define TRIG 12
+#define ECHO 13 
 
 #define speed 2000
 class Button_Class

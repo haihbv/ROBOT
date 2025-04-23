@@ -1,8 +1,13 @@
 #ifndef TASK_H
 #define TASK_H
+#include "robot.h"
 
 
-#define LAZER 1 // 0: khong co laze, 1: co laze
+#define OBJECT 1       // 1: gap vat, 0: do nothing
+#define ENEMY 1        // 1: gap dich, gap ta, 0: do nothing
+#define LAZER 1        // 1: co laze, 0: do nothing 
+#define FLAG 1         // 1: gap co, 0: do nothing
+
 /***********************************************************
  * @task: Leanbot xuất phát từ vị trí “Hành quân”,
  * đi qua con đường an toàn, lấy lần lượt 2 thanh gỗ và
@@ -32,6 +37,5 @@ void task3(void);
  * “Giải phóng” và kết thúc nhiệm vụ.
  ************************************************************/
 void task4(void);
-
 
 #endif

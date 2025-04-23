@@ -1,7 +1,5 @@
-#include "robot.h"
 #include "_Task.h"
-#include <Arduino.h>
-
+#include "ultrasonic.h"
 /***********************************************************
  * @task: Leanbot xuất phát từ vị trí “Hành quân”,
  * đi qua con đường an toàn, lấy lần lượt 2 thanh gỗ và
@@ -9,12 +7,16 @@
  * Sau đó di chuyển tới "Vị trí Trung Tâm".
  ************************************************************/
 void task1(void)
-{   
+{
     // di thang
     Robot.Motion.RunLR(speed, speed);
     Robot.Motion.WaitDistance(2117);
     Robot.Motion.Stop();
     delay(500);
+
+    Ultrasonic.Check(); // kiem tra xem xung quanh co vat can khong
+
+    delay(1000);
 }
 
 /***********************************************************
@@ -101,8 +103,60 @@ void task3(void)
 void task4(void)
 {
     // quay goc 90 do
-    Robot.Motion.RunLR(-speed, +speed);
-    Robot.Motion.WaitRotation(8466);
+    Robot.Motion.RunLR(+speed, -speed);
+    Robot.Motion.WaitRotation(2117);
     Robot.Motion.Stop();
     delay(500);
+    Robot.Motion.RunLR(speed, speed);
+    Robot.Motion.WaitDistance(2117 * 4);
+    Robot.Motion.Stop();
+    delay(500);
+    Robot.Motion.RunLR(+speed, -speed);
+    Robot.Motion.WaitRotation(2117);
+    Robot.Motion.Stop();
+#if (FLAG == 0)
+    {
+        Robot.Gripper.Open();
+        delay(500);
+        Robot.Gripper.Close();
+        delay(500);
+    }
+#endif
+    delay(500);
+    Robot.Motion.RunLR(-speed, -speed);
+    Robot.Motion.WaitDistance(16936);
+    Robot.Motion.Stop();
+    delay(500);
+    Robot.Motion.RunLR(-speed, speed);
+    Robot.Motion.WaitRotation(2117);
+    Robot.Motion.Stop();
+    delay(500);
+    Robot.Motion.RunLR(speed, speed);
+    Robot.Motion.WaitDistance(3387);
+    Robot.Motion.Stop();
+    delay(500);
+    Robot.Motion.RunLR(speed, -speed);
+    Robot.Motion.WaitRotation(2117);
+    Robot.Motion.Stop();
+    delay(500);
+    Robot.Motion.RunLR(speed, speed);
+    Robot.Motion.WaitDistance(19053);
+    Robot.Motion.Stop();
+    delay(500);
+    Robot.Motion.RunLR(speed, -speed);
+    Robot.Motion.WaitRotation(2117);
+    Robot.Motion.Stop();
+    delay(500);
+    Robot.Motion.RunLR(speed, speed);
+    Robot.Motion.WaitDistance(10585);
+    Robot.Motion.Stop();
+    delay(500);
+#if (FLAG == 0)
+    {
+        Robot.Gripper.Open();
+        delay(500);
+        Robot.Gripper.Close();
+        delay(500);
+    }
+#endif
 }
