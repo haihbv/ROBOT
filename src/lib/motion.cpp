@@ -14,7 +14,7 @@ void Motion_Class::Stop(void)
   RunLR(0, 0);
 }
 
-// Robot chạy theo số bước
+//Robot chạy theo số bước
 // void Motion_Class::WaitDistance(uint32_t distance_step)
 // {
 //   int pre_encoder = ((Abs(left_speed) > Abs(right_speed)) ? Left_Stepper.encoder : Right_Stepper.encoder);
@@ -86,6 +86,42 @@ void Motion_Class::MoveBackward(uint32_t distance_step)
   Robot.Motion.WaitDistance(distance_step);
   Robot.Motion.Stop();
 }
+
+
+void Motion_Class::Turn_Right_90()
+{
+  Robot.Motion.RunLR(+speed, -speed);
+  Robot.Motion.WaitRotation(2117);
+  Robot.Motion.Stop();
+
+  // Robot.Motion.RunLR(+speed, 0);
+  // Robot.Motion.WaitRotation(4233);
+}
+
+void Motion_Class::Turn_Left_90()
+{
+  Robot.Motion.RunLR(-speed, +speed);
+  Robot.Motion.WaitRotation(2117);
+  Robot.Motion.Stop();
+
+  // Robot.Motion.RunLR(0, +speed);
+  // Robot.Motion.WaitRotation(4233);
+}
+void Motion_Class::Turn_Right_45()
+{
+  Robot.Motion.RunLR(+speed, -speed);
+  Robot.Motion.WaitRotation(1058);
+  Robot.Motion.Stop();
+}
+
+void Motion_Class::Turn_Left_45()
+{
+  Robot.Motion.RunLR(-speed, +speed);
+  Robot.Motion.WaitRotation(1058);
+  Robot.Motion.Stop();
+}
+
+
 
 int Motion_Class::GetEncoder(void)
 {

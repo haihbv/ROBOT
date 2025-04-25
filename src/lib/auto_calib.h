@@ -3,10 +3,10 @@
 #include <Arduino.h>
 #define NUM_SENSORS 4
 
-#define PIN_SENSOR_1 30
-#define PIN_SENSOR_2 31
-#define PIN_SENSOR_3 32
-#define PIN_SENSOR_4 33
+#define PIN_SENSOR_1 A4
+#define PIN_SENSOR_2 A5
+#define PIN_SENSOR_3 A6
+#define PIN_SENSOR_4 A7
 
 #define CALIB_BUTTON 18
 class Auto_calib

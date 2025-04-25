@@ -15,4 +15,5 @@ void Robot_Class::Init(void)
   Gripper.Left_Servo.attach(LEFT_SERVO_PIN);
   Gripper.Right_Servo.attach(RIGHT_SERVO_PIN);
 
+  Ultrasonic.Init();
 }

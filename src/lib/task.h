@@ -3,17 +3,17 @@
 #include "robot.h"
 
 
-#define OBJECT 1       // 1: gap vat, 0: do nothing
-#define ENEMY 1        // 1: gap dich, gap ta, 0: do nothing
-#define LAZER 1        // 1: co laze, 0: do nothing 
-#define FLAG 1         // 1: gap co, 0: do nothing
-
 /***********************************************************
  * @task: Leanbot xuất phát từ vị trí “Hành quân”,
  * đi qua con đường an toàn, lấy lần lượt 2 thanh gỗ và
  * đặt chúng vào các vị trí trống tại vị trí “Căn cứ”.
  * Sau đó di chuyển tới "Vị trí Trung Tâm".
  ************************************************************/
+void tien_len_can_cu(uint16_t distance_step);
+void lui_ve_gap_vat_ben_trai();
+void lui_ve_gap_vat_ben_phai();
+void kiem_tra_xung_quanh();
+void dat_vat();
 void task1(void);
 
 /***********************************************************

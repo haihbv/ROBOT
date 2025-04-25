@@ -26,6 +26,12 @@
 #define TRIG 12
 #define ECHO 13 
 
+#define OBJECT 0       // 1: gap vat, 0: do nothing
+#define ENEMY 1        // 1: gap dich, gap ta, 0: do nothing
+#define LAZER 0        // 1: co laze, 0: do nothing 
+#define FLAG 1         // 1: gap co, 0: do nothing
+
+
 #define speed 2000
 class Button_Class
 {
@@ -72,6 +78,10 @@ class Motion_Class
     void WaitRotation(uint32_t rotation_step);
     void MoveForward(uint32_t distance_step);
     void MoveBackward(uint32_t distance_step);
+    void Turn_Right_90();
+    void Turn_Left_90();
+    void Turn_Right_45();
+    void Turn_Left_45();
     int  GetEncoder(void);
 };
 
@@ -86,6 +96,12 @@ class Gripper_Class
     void MoveTo(int16_t angle);
 };
 
+class Ultrasonic_Class
+{
+  public:
+  void Init();
+  float pingCm();
+};
 class Robot_Class
 {
   public:
@@ -94,6 +110,7 @@ class Robot_Class
     IR_Class       IRSensor;
     Motion_Class   Motion;
     Gripper_Class  Gripper;
+    Ultrasonic_Class Ultrasonic;
 };
 
 extern Robot_Class Robot;
