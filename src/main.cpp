@@ -3,9 +3,8 @@
 
 void setup()
 {
-  // Serial.begin(9600);
+  //Serial.begin(9600);
   Robot.Init();
-  
 }
 
 void loop()
@@ -28,6 +27,15 @@ void loop()
   }
   else
   {
-    Robot.Motion.Stop();
+    float distance = Robot.Ultrasonic.pingCm();
+    if (distance > 0  && distance < 10)
+    {
+      Robot.Motion.MoveForward(2117);
+      delay(50);
+      Robot.Gripper.Open();
+      Robot.Gripper.Close();
+      delay(50);
+    }
+    
   }
 }

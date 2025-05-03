@@ -11,7 +11,7 @@ void tien_len_can_cu(uint16_t distance_step)
 {
     Robot.Motion.MoveForward(distance_step); // 95cm (2117 * 10)
 }
-// lui ve gap vat ben trai (truoc vach den cua vat) va tien len can cu 
+// lui ve gap vat ben trai (truoc vach den cua vat) va tien len can cu
 void lui_ve_gap_vat_ben_trai() // truoc vach den cua vat
 {
     Robot.Motion.MoveForward(2117 * 4); // 40cm
@@ -25,8 +25,8 @@ void lui_ve_gap_vat_ben_trai() // truoc vach den cua vat
     // tien len can cu
     tien_len_can_cu(2117 * 4); // 40 cm
 }
-//lui ve gap vat ben phai (truoc vach den cua vat) va tien len can cu 
-void lui_ve_gap_vat_ben_phai() 
+// lui ve gap vat ben phai (truoc vach den cua vat) va tien len can cu
+void lui_ve_gap_vat_ben_phai()
 {
     Robot.Motion.MoveForward(2117 * 4); // 40cm
     Robot.Motion.Turn_Right_45();
@@ -39,62 +39,65 @@ void lui_ve_gap_vat_ben_phai()
     // tien len can cu
     tien_len_can_cu(2117 * 4); // 40 cm
 }
-int pos1 = 1058, pos2 = 1058 + 2117, pos3 = 1058 + 2117 * 2, pos4 = 1058 + 2117 * 3; 
+int pos1 = 1058, pos2 = 1058 + 2117, pos3 = 1058 + 2117 * 2, pos4 = 1058 + 2117 * 3;
 int Rotation_Save[4] = {pos1, pos2, pos3, pos4};
-int Save_Muc_tieu[4] = {1, 1, 1 , 1};
+int Save_Muc_tieu[4] = {1, 1, 1, 1};
 void kiem_tra_xung_quanh()
-{   
+{
     int sl = 2;
     int cnt = 0;
     int idx;
     Robot.Motion.Turn_Left_45();
     delay(50);
     Robot.Motion.MoveForward(236);
-    if(Robot.Ultrasonic.pingCm() < 6)
+    if (Robot.Ultrasonic.pingCm() < 12)
     {
         ++cnt;
         idx = 0;
         Save_Muc_tieu[idx] = 0;
     }
     Robot.Motion.MoveBackward(236);
-    if (cnt==sl) return;
+    if (cnt == sl)
+        return;
 
     Robot.Motion.Turn_Right_90();
     delay(50);
     Robot.Motion.MoveForward(236);
-    if(Robot.Ultrasonic.pingCm() < 6)
+    if (Robot.Ultrasonic.pingCm() < 12)
     {
         ++cnt;
         idx = 1;
         Save_Muc_tieu[idx] = 0;
     }
     Robot.Motion.MoveBackward(236);
-    if (cnt==sl) return;
+    if (cnt == sl)
+        return;
 
     Robot.Motion.Turn_Right_90();
     delay(50);
     Robot.Motion.MoveForward(236);
-    if(Robot.Ultrasonic.pingCm() < 6)
+    if (Robot.Ultrasonic.pingCm() < 12)
     {
         ++cnt;
         idx = 2;
         Save_Muc_tieu[idx] = 0;
     }
     Robot.Motion.MoveBackward(236);
-    if (cnt==sl) return;
+    if (cnt == sl)
+        return;
 
     Robot.Motion.Turn_Right_90();
     delay(50);
     Robot.Motion.MoveForward(236);
-    if(Robot.Ultrasonic.pingCm() < 6)
+    if (Robot.Ultrasonic.pingCm() < 12)
     {
         ++cnt;
         idx = 3;
         Save_Muc_tieu[idx] = 0;
     }
     Robot.Motion.MoveBackward(236);
-    if (cnt==sl) return;
-
+    if (cnt == sl)
+        return;
 
     // quay ve phia xuat phat
     Robot.Motion.Turn_Left_90();
@@ -103,7 +106,7 @@ void kiem_tra_xung_quanh()
 
 void dat_vat()
 {
-    if(Save_Muc_tieu[0] == 0)
+    if (Save_Muc_tieu[0] == 0)
     {
         Robot.Motion.RunLR(-speed, speed);
         Robot.Motion.WaitRotation(Rotation_Save[0]);
@@ -115,7 +118,7 @@ void dat_vat()
         Robot.Motion.WaitRotation(Rotation_Save[0]);
         Save_Muc_tieu[0] = 1; // dat xong gan lai bang 1 de lan sau kiem tra ko kiem tra lai nua
     }
-    else if(Save_Muc_tieu[1] == 0)
+    else if (Save_Muc_tieu[1] == 0)
     {
         Robot.Motion.RunLR(-speed, speed);
         Robot.Motion.WaitRotation(Rotation_Save[1]);
@@ -127,7 +130,7 @@ void dat_vat()
         Robot.Motion.WaitRotation(Rotation_Save[1]);
         Save_Muc_tieu[1] = 1;
     }
-    else if(Save_Muc_tieu[2] == 0)
+    else if (Save_Muc_tieu[2] == 0)
     {
         Robot.Motion.RunLR(-speed, speed);
         Robot.Motion.WaitRotation(Rotation_Save[2]);
@@ -139,7 +142,7 @@ void dat_vat()
         Robot.Motion.WaitRotation(Rotation_Save[2]);
         Save_Muc_tieu[2] = 1;
     }
-    else if(Save_Muc_tieu[3] == 0)
+    else if (Save_Muc_tieu[3] == 0)
     {
         Robot.Motion.RunLR(-speed, speed);
         Robot.Motion.WaitRotation(Rotation_Save[3]);
@@ -176,6 +179,12 @@ void task2(void)
 {
     Robot.Motion.RunLR(-2000, 0);
     Robot.Motion.WaitRotation(4233);
+    delay(2000);
+    Robot.Motion.RunLR(0, 2000);
+    Robot.Motion.WaitRotation(4233);
+    delay(2000);
+    // Robot.Motion.RunLR(-2000, 2000);
+    // Robot.Motion.WaitRotation(2117);
 }
 
 /***********************************************************
@@ -209,9 +218,12 @@ void task3(void)
         delay(100);
     }
 #endif
+    Robot.Motion.RunLR(speed, -speed);
+    Robot.Motion.WaitRotation(706*2);
+    Robot.Motion.Stop();
     // ban tia lazer ben phai
     Robot.Motion.RunLR(speed, -speed);
-    Robot.Motion.WaitRotation(2117);
+    Robot.Motion.WaitRotation(706);
     Robot.Motion.Stop();
 #if (LAZER == 0)
     {
@@ -234,5 +246,21 @@ void task3(void)
  * “Giải phóng” và kết thúc nhiệm vụ.
  ************************************************************/
 void task4(void)
-{
+{   
+    //quay lan 1
+    Robot.Motion.RunLR(-2000, 0);
+    Robot.Motion.WaitRotation(4233);
+    delay(1000);
+    Robot.Motion.RunLR(0, 2000);
+    Robot.Motion.WaitRotation(4233);
+    delay(1000);
+
+    //quay lan 2
+    Robot.Motion.RunLR(-2000, 100);
+    Robot.Motion.WaitRotation(2177);
+    //quay 2 cai cuoi
+    Robot.Motion.RunLR(2000, 500);
+    Robot.Motion.WaitRotation(3000);
+    Robot.Motion.RunLR(2000, -2000);
+    Robot.Motion.WaitRotation(706+706);
 }

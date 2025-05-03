@@ -9,7 +9,7 @@ void Ultrasonic_Class::Init()
 }
 
 float Ultrasonic_Class::pingCm()
-{
+{   
     float distance = 0;
     digitalWrite(TRIG, LOW);
     delayMicroseconds(2);
@@ -17,8 +17,7 @@ float Ultrasonic_Class::pingCm()
     delayMicroseconds(10);
     digitalWrite(TRIG, LOW);
 
-    distance = pulseIn(ECHO, HIGH, 30000) / 58.0;
-
+    distance = pulseIn(ECHO, HIGH) * 0.034 / 2; // cm
     return distance;
 }
 

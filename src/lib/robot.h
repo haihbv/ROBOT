@@ -113,6 +113,7 @@ class Robot_Class
     Ultrasonic_Class Ultrasonic;
 };
 
+
 extern Robot_Class Robot;
 
 void Robot_Init(void);
